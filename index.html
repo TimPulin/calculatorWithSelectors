@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" href="index.css">
+		<link rel="shortcut icon" href="/imagesCalculator/favicon.ico" type="image/x-icon">
+		<title>калькулятор элементов программы фигурного катания</title>
+	</head>
+	<body>
+	
+			
+			
+<!-- Modal -->
+<div class="modal fade" id="windowElement" tabindex="-1" role="dialog" aria-labelledby="windowElementLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content bg-light" ><!--content-->
+			<div class="contanerGrey rounded" style="height:40px"><!--title-->
+				<center><output class="outputTitle fontOfTitle"></output></center>				
+			</div> <!--END title-->
+			<div class="contanerGrey"><!--output-->
+				<output class="outputTitle_NameOfElement"></output>
+				<output class="outputTitle_ValueOfElement floatR">0.00</output>
+			</div><!--END output-->
+			<div class="hide JSjumps"><!--wrap jumps-->
+				<div class="contanerGrey"><!--first jump-->
+					<div class="bg-warning rounded" style="padding:5px"><!--wrap orange-->
+						<span><!--btngroup-->
+							<select style="width:74px" autocomplete="off">
+								<option value=0 selected disabled class="hide">обороты</option>
+								<option value=0></option>
+								<option value=1>1</option>
+								<option value=2>2</option>
+								<option value=3>3</option>
+								<option value=4>4</option>
+							</select>
+							<select class="disabled unlockBtnAddJump JSNeedAdditionalSelect marginSelect" style="width:74px" autocomplete="off">
+								<option value=0 disabled selected class="hide">прыжок</option>
+								<option value=0></option>
+								<option value="A">A</option>
+								<option value="T">T</option>
+								<option value="S">S</option>
+								<option value="Lo">Lo</option>
+								<option value="F">F</option>
+								<option value="Lz">Lz</option>
+							</select>
+							<select class="disabled JSSecondarySelect" style="width:74px" autocomplete="off">
+								<option value=0 disabled selected class="hide">галки</option>
+								<option value=0></option>
+								<option value="<"><</option>
+								<option value="<<"><<</option>
+							</select>
+							<select class="hide JSSecondarySelect JSselectAdditional marginSelect" style="width:30px" autocomplete="off">
+								<option value=0 disabled selected class="hide">e</option>
+								<option value=0></option>
+								<option value="e">e</option>
+							</select>
+						<span><!--END btngroup-->
+						<output class="outputValueOfElement floatR">0.00</output>
+					</div><!--END wrap orange-->
+					<input type="button" class="disabled buttonAddJump convexFont" value="добавить прыжок">
+				</div><!--END first jump-->
+				<div class="hide contanerGrey"><!--second jump-->
+					<div class="bg-warning rounded" style="padding:5px;"><!--wrap orange-->
+						<span><!--btngroup-->
+							<select style="width:74px" autocomplete="off">
+								<option value=0 selected disabled class="hide">обороты</option>
+								<option value=0></option>
+								<option value=1>1</option>
+								<option value=2>2</option>
+								<option value=3>3</option>
+								<option value=4>4</option>
+							</select>
+							<select class="disabled unlockBtnAddJump JSSelectChanger marginSelect" style="width:74px" autocomplete="off">
+								<option value=0 disabled selected class="hide">прыжок</option>
+								<option value=0></option>
+								<option value="A">A</option>
+								<option value="T">T</option>
+								<option value="Lo">Lo</option>
+								<option value="Eu">Eu</option>
+								
+							</select>
+							<select class="disabled JSSecondarySelect" style="width:74px" autocomplete="off">
+								<option value=0 disabled selected class="hide">галки</option>
+								<option value=0></option>
+								<option value="<"><</option>
+								<option value="<<"><<</option>
+							</select>
+						</span><!--END btngroup-->
+						<output class="outputValueOfElement floatR">0.00</output>
+					</div><!--END wrap orange-->
+					<input type="button" class="disabled buttonAddJump convexFont" value="добавить прыжок">
+				</div><!--END second jump-->
+				<div class="hide contanerGrey"><!--fird jump-->
+					<div class="bg-warning rounded" style="padding:5px;"><!--wrap orange-->
+						<span><!--btngroup-->
+							<select style="width:74px" autocomplete="off">
+								<option value=0 selected disabled class="hide">обороты</option>
+								<option value=0></option>
+								<option value=1>1</option>
+								<option value=2>2</option>
+								<option value=3>3</option>
+								<option value=4>4</option>
+							</select>
+							<select class="disabled JSNeedAdditionalSelect JSSelectFloatOptions marginSelect" style="width:74px" autocomplete="off">
+								<option value=0 disabled selected class="hide">прыжок</option>
+								<option value=0></option>
+							</select>
+							<select class="disabled JSSecondarySelect" style="width:74px" autocomplete="off">
+								<option disabled selected class="hide">галки</option>
+								<option></option>
+								<option><</option>
+								<option><<</option>
+							</select>
+							<select class="hide JSSecondarySelect JSselectAdditional marginSelect" style="width:30px" autocomplete="off">
+								<option value=0 disabled selected class="hide">e</option>
+								<option value=0></option>
+								<option value="e">e</option>
+							</select>
+						</span><!--END btngroup-->
+						<output class="outputValueOfElement floatR">0.00</output>
+					</div><!--END wrap orange-->
+				</div><!--END fird jump-->
+			</div><!--END wrap jumps-->
+			<div class="hide JSspins"><!--wrap spins-->
+				<div class="contanerGrey"><!--contanerGrey-->
+					<div class="bg-warning rounded" style="padding:5px"><!--wrap orange-->
+						<span><!--btngroup-->
+						<select class="JSSecondarySelect JSselectAdditional" style="width:30px; color:#999" autocomplete="off">
+								<option value=0 disabled selected class="hide">F</option>
+								<option value=0></option>
+								<option value="F">F</option>
+							</select>
+							<select class="marginSelect JSNeedAdditionalSelect" style="width:85px" autocomplete="off">
+								<option value=0 disabled selected class="hide">вращение</option>
+								<option value=0></option>
+								<optgroup label="базовые позиции">
+								<option value="USp">USp</option>
+								<option value="LSp">LSp</option>
+								<option value="CSp">CSp</option>
+								<option value="SSp">SSp</option>
+								</optgroup>
+								<optgroup label="со сменой ноги">
+								<option value="CUSp">CUSp</option>
+								<option value="CLSp">CLSp</option>
+								<option value="CCSp">CCSp</option>
+								<option value="CSSp">CSSp</option>
+								</optgroup>
+								<optgroup label="комбинации">
+								<option value="CoSp">CoSp</option>
+								<option value="CCoSp">CCoSp</option>
+								</optgroup>
+							</select>
+							<select class="disabled" style="width:74px" autocomplete="off">
+								<option value=0 selected disabled class="hide">уровень</option>
+								<option value=0></option>
+								<option value="B">B</option>
+								<option value=1>1</option>
+								<option value=2>2</option>
+								<option value=3>3</option>
+								<option value=4>4</option>
+							</select>
+							<select class="hide JSSecondarySelect JSselectAdditional marginSelect" style="width:30px" autocomplete="off">
+								<option value=0 disabled selected class="hide" style="color:#999">V</option>
+								<option value=0></option>
+								<option value="V">V</option>
+							</select>
+						</span><!--END btngroup-->
+						<output class="outputValueOfElement floatR">0.00</output>
+					</div><!--END wrap orange-->
+				</div><!--END contanerGrey-->
+			</div><!--END wrapspins-->
+			<div class="hide JSsteps"><!--wrap steps-->
+				<div class="contanerGrey"><!--contanerGrey-->
+					<div class="bg-warning rounded" style="padding:5px"><!--wrap orange-->
+						<span><!--btngroup-->
+							<select class="JSselectStep" style="width:75px" autocomplete="off">
+								<option value=0 selected disabled class="hide">дорожка</option>
+								<option value=0></option>
+								<option value="StSq">StSq</option>
+								<option value="ChSq">ChSq</option>
+							</select>
+							<select class="disabled marginSelect" style="width:75px" autocomplete="off">
+								<option value=0 selected disabled class="hide">уровень</option>
+								<option value=0></option>
+								<option value="B">B</option>
+								<option value=1>1</option>
+								<option value=2>2</option>
+								<option value=3>3</option>
+								<option value=4>4</option>
+							</select>
+						</span><!--END btngroup-->
+						<output class="outputValueOfElement floatR">0.00</output>
+					</div><!--END wrap orange-->
+				</div><!--END contanerGrey-->	
+			</div><!--END wrap steps-->
+			<div style="text-align:center; padding:5px"><!--buttons for choice-->
+				<input type="button" class="buttonBasic JSbuttonSteps buttonWork" value="дорожки">
+				<input type="button" class="buttonBasic JSbuttonSpins buttonWork" style="margin:0 15px" value="вращения">
+				<input type="button" class="buttonBasic JSbuttonJumps buttonWork" value="прыжки">
+			</div><!--END buttons for choice-->
+			<div class="contanerGrey rounded"><!--buttons save/cancel-->
+				<input type="button" class="buttonReset buttonFlat" value="сброс">
+				<input type="button" class="floatR buttonFlat buttonSave" data-dismiss="modal" value="сохранить">
+			</div><!--END buttons save/cancel-->
+		</div><!--END content-->
+	</div><!--END dialog-->
+</div><!--END fade-->
+  
+			
+			
+			
+			
+
+		<div class="container-fluid">
+			<div class="row justify-content-center"> <!--Шапка сайта-->
+				<div  class="col-md-12" style="background-color: #FFCC00"><!--колонка-->
+					<div style="float:left"><!-- uSocial -->
+						<script async src="https://usocial.pro/usocial/usocial.js?v=6.1.4" data-script="usocial" charset="utf-8"></script>
+						<div class="uSocial-Share" data-pid="571eb59380f722d7e3012ec6da00c17b" data-type="share" data-options="round-rect,style3,default,absolute,horizontal,size24,eachCounter0,counter0" data-social="vk,fb,ok,telegram" data-mobile="vi,wa,sms"></div>
+					</div><!-- КОНЕЦ uSocial -->
+			       <center><h1>калькулятор элементов программы по фигурному катанию</h1></center>
+				</div><!--КОНЕЦ колонка-->
+			</div><!--КОНЕЦ шапка сайта-->
+
+
+		<div class="row justify-content-start bg-light"><!--bootstrap ряд2-->
+		 	<div class="col-md-7 col-lg-4 bg-light text-dark"> <!--основная колонка с калькулятором-->
+					
+				    <table class=" tableCalculator"><!--таблица калькулятора-->
+					     <tr> <!--Ряд для назначения размеров ячеек-->
+						    <th><output></output></th><!--для высоты таблицы-->
+						    <th></th>
+						    <th></th>
+						    <th></th>
+						    <th></th>
+						</tr>
+						<tr>
+							<td></td>
+							<td colspan="3"><center><output id="atention"></output></center></td> <!--поле вывода сообщений-->
+							<td></td>
+						</tr>
+						<tr class="convexFont"> <!--НАЧАЛО ФУНКЦИОНАЛЬНОЙ ЧАСТИ ТАБЛИЦЫ-->
+							<td>#</td>
+							<td>элементы</td>
+							<td></td> <!--ячейка для goe-->
+							<td>x</td>
+							<td>баллы</td>
+						</tr>
+						<tr class="greyStripe"><!--линия №1-->
+							<td class="convexFont">1</td>
+							<td>
+								<div class="contanerTransparent" id="firstElement">
+									<output></output>
+								</div>
+							</td>
+							<td>
+								<select class="hide" autocomplete="off">
+									<option>-5</option>
+									<option>-4</option>
+									<option>-3</option>
+									<option>-2</option>
+									<option>-1</option>
+									<option selected>0</option>
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+								</select>
+							</td>
+							<td><input type="checkbox" class="JScheckboxSecondPart" data-toggle="tooltip" ></td>
+							<td><output>00.00</output></td>
+						</tr><!--КОНЕЦ линия №1-->
+						<tr class="greyStripe"><!--линия №2-->
+							<td class="convexFont">2</td>
+							<td>
+								<div class="contanerTransparent" id="secondElement">
+									<output></output>
+								</div>
+							</td>
+							<td>
+								<select class="hide" autocomplete="off">
+									<option>-5</option>
+									<option>-4</option>
+									<option>-3</option>
+									<option>-2</option>
+									<option>-1</option>
+									<option selected>0</option>
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+								</select>
+							</td>
+							<td><input type="checkbox" class="JScheckboxSecondPart" data-toggle="tooltip" ></td>
+							<td><output>00.00</output></td>
+						</tr><!--КОНЕЦ линия №2-->
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+						<tr>
+							<td></td>
+							<td style="text-align:left"><input type="button" class="buttonBasic buttonReset " value="сброс"></td>
+							<td></td>
+							<td></td>
+							<th><output id="outTotal">00.00</output></th>
+						</tr>
+						<tr><!--для высоты таблицы-->
+							<th colspan="5"><output></output></th> 
+						</tr><!--КОНЕЦ для высоты таблицы-->
+					</table><!--КОНЕЦ таблица калькулятора-->
+				
+				
+			</div><!--КОНЕЦ основная колонка с калькулятором-->
+
+			<div class="col-lg-3 col-md-5 order-lg-first order-md-first bg-light text-dark"> <!--правая колонка - список элементов-->
+			
+				<div class="notationBord">
+					<center><h2>условные обозначения элементов</h2></center>
+			
+					<div class="wrap_head">
+						<h3 class="point_of_list">прыжки</h3>
+					</div><!--КОНЕЦ wrap_head прыжки-->
+					<div class="wrap_list">
+						<ul>
+							<li>Аксель - A</li>
+							<li>Тулуп - T</li>
+							<li>Сальхов - S</li>
+							<li>Ритбергер - Lo</li>
+							<li>Флипп - F</li>
+							<li>Лутц - Lz</li>
+							<li>Ойлер - Eu</li>
+						</ul>
+					</div><!--КОНЕЦ wrap_list прыжки-->
+					<div class="wrap_head">
+						<h3 class="point_of_list">вращения</h3>
+					</div><!--КОНЕЦ wrap_head вращения-->
+					<div class="wrap_list_s">
+						<div class="wrap_head_s">
+							<h4 class="sub_title">базовые позиции</h4>
+						</div>
+						<div class="wrap_list">
+							<ul>
+								<li>Стоя - USp</li>
+								<li>Волчок - SSp</li>
+								<li>Либела - CSp</li>
+								<li>Заклон - LSp</li>
+							</ul>
+						</div><!--КОНЕЦ wrap_list базовые-->
+
+						<div class="wrap_head_s">
+							<h4 class="sub_title">прыжок во вращение</h4>
+						</div>
+						<div class="wrap_list">
+							<ul>
+								<li>Прыжок в позицию стоя - FUSp</li>
+								<li>Прыжок в волчок - FSSp</li>
+								<li>Прыжок в либелу - FCSp</li>
+								<li>Прыжок в заклон - FLSp</li>
+							</ul>
+						</div><!--КОНЕЦ wrap_list прыжок во вращение-->
+
+						<div class="wrap_head_s">
+							<h4 class="sub_title">вращения со сменой ноги</h4>
+						</div>
+						<div class="wrap_list">
+							<ul>
+								<li>Стоя со сменой ноги - CUSp</li>
+								<li>Волчок со сменой ноги - CSSp</li>
+								<li>Либела со сменой ноги - CCSp</li>
+								<li>Заклон со сменой ноги - CLSp</li>
+							</ul>
+						</div><!--КОНЕЦ wrap_list со сменой ноги-->
+
+						<div class="wrap_head_s">
+							<h4 class="sub_title">комбинация вращений</h4>
+						</div>
+						<div class="wrap_list">
+							<ul>
+								<li>Без смены ноги - CoSp</li>
+								<li>Со сменой ноги - CCoSp</li>
+							</ul>
+						</div><!--КОНЕЦ wrap_list комбинация-->
+					</div><!--КОНЕЦ wrap_list_s все типы вращений-->
+					<div class="wrap_head">
+						<h3 class="point_of_list">дорожки</h3>
+					</div>
+					<div class="wrap_list">
+						<ul>
+							<li>Дорожка шагов - StSq</li>
+							<li>Хореографическая последовательность - ChSq</li>
+						</ul>
+					</div><!--КОНЕЦ wrap_list дорожки-->
+				</div><!--КОНЕЦ notationBord-->
+				</div>
+				<div class="col-lg-1 d-md-none d-lg-block"></div> <!--пространство для красоты-->
+		
+				<div class="col-lg-3 bg-light text-dark"> <!--колонка рекламного блока-->
+					<div class="notationBord">
+						<center><h3 class="title_box">как работает?</h3></center>
+						<p>В первое поле калькулятора введите условное обозначение первого элемента программы. Условное обозначение можно посмотреть 
+						в соответствующем разделе сайта. Подобным образом введите все элементы программы по порядку.</p>
+						<p>Цифра перед аббревиатурой прыжка будет означать количество оборотов. <i>Например: 2Т.</i> 
+						Цифра после аббревиатуры вращения или дорожки - уровень. <i>Например: SSp4.</i> 
+						Хореографическая последовательность <i>ChSq</i> уровня не имеет.</p>   
+						<p>Если элемент является каскадом - для второго прыжка каскада нажмите кнопку со знаком "плюс" - появится дополнительное поле
+						ввода. Для каскада из трёх прыжков нажмите следующую кнопку со знаком "плюс".</p>  
+						<p>Если прыжковый элемент стоит во второй части программы - поставьте напротив него "галочку" в последнем столбце калькулятора.</p>
+					</div><!--КОНЕЦ notationBord аннотация-->
+				</div><!--КОНЕЦ колонка рекламного блока-->
+				<div class="col-lg-1 d-md-none d-lg-block"></div> <!--пространство для красоты-->
+		</div><!--КОНЕЦ bootstrap ряд2-->
+	
+		<!--ПОДВАЛ-->
+		<div class="row justify-content-center"> 
+			<!--LiveInternet logo
+		    <div  class="col" style="background-color: #999">
+				<a href="//www.liveinternet.ru/click"
+				target="_blank"><img src="//counter.yadro.ru/logo?38.3"
+				title="LiveInternet"
+				alt="" border="0" width="31" height="31"/></a>
+			</div><!--/LiveInternet-->
+			 
+			<div  class="col" style="background-color: #999">
+				 <div><center>©Пять оборотов</center></div>
+			</div>
+			<div class="col" style="background-color: #999">
+			</div>
+			
+		</div><!--КОНЕЦ bootstrap ряд-подвал-->
+	
+
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		<script src="index.js"></script>
+		<script src="popupwindow.js"></script>
+		<script src="listofvalue.js"></script>
+	
+		<!--LiveInternet counter
+		<script type="text/javascript">
+			new Image().src = "//counter.yadro.ru/hit?r"+
+			escape(document.referrer)+((typeof(screen)=="undefined")?"":
+			";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+			screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+			";h"+escape(document.title.substring(0,150))+
+			";"+Math.random();
+		</script><!--/LiveInternet-->
+		
+
+	</body>
+</html>
