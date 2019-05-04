@@ -18,7 +18,7 @@
 <!-- Modal -->
 <div class="modal fade" id="windowElement" tabindex="-1" role="dialog" aria-labelledby="windowElementLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
-		<div class="modal-content bg-light" ><!--content-->
+		<div class="modal-content bg-light JSmodalWindow" ><!--content-->
 			<div class="contanerGrey rounded" style="height:40px"><!--title-->
 				<center><output class="outputTitle fontOfTitle"></output></center>				
 			</div> <!--END title-->
@@ -204,7 +204,7 @@
 				<input type="button" class="buttonBasic JSbuttonJumps buttonWork" value="прыжки">
 			</div><!--END buttons for choice-->
 			<div class="contanerGrey rounded"><!--buttons save/cancel-->
-				<input type="button" class="buttonReset buttonFlat" value="сброс">
+				<input type="button" class="JSbuttonReset_Modal buttonReset buttonFlat" data-dismiss="modal" value="сброс">
 				<input type="button" class="floatR buttonFlat buttonSave" data-dismiss="modal" value="сохранить">
 			</div><!--END buttons save/cancel-->
 		</div><!--END content-->
@@ -251,11 +251,11 @@
 							<td>x</td>
 							<td>баллы</td>
 						</tr>
-						<tr class="greyStripe"><!--линия №1-->
+						<tr class="greyStripe"><!--линия №1------------------------------------->
 							<td class="convexFont">1</td>
 							<td>
 								<div class="contanerTransparent" id="firstElement">
-									<output></output>
+									<output class="JSoutputTransparent_NameOfElement"></output>
 								</div>
 							</td>
 							<td>
@@ -274,13 +274,13 @@
 								</select>
 							</td>
 							<td><input type="checkbox" class="JScheckboxSecondPart" data-toggle="tooltip" ></td>
-							<td><output>00.00</output></td>
+							<td><output class="JSoutputTransparent_ValueOfElement">0.00</output></td>
 						</tr><!--КОНЕЦ линия №1-->
-						<tr class="greyStripe"><!--линия №2-->
+						<tr class="greyStripe"><!--линия №2----------------------------------------->
 							<td class="convexFont">2</td>
 							<td>
 								<div class="contanerTransparent" id="secondElement">
-									<output></output>
+									<output class="JSoutputTransparent_NameOfElement"></output>
 								</div>
 							</td>
 							<td>
@@ -299,25 +299,15 @@
 								</select>
 							</td>
 							<td><input type="checkbox" class="JScheckboxSecondPart" data-toggle="tooltip" ></td>
-							<td><output>00.00</output></td>
+							<td><output class="JSoutputTransparent_ValueOfElement">0.00</output></td>
 						</tr><!--КОНЕЦ линия №2-->
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-						<tr>
+						
+						<tr><!--блок кнопок и вывода суммы баллов-->
 							<td></td>
 							<td style="text-align:left"><input type="button" class="buttonBasic buttonReset " value="сброс"></td>
 							<td></td>
 							<td></td>
-							<th><output id="outTotal">00.00</output></th>
+							<th><output id="outTotal">0.00</output></th>
 						</tr>
 						<tr><!--для высоты таблицы-->
 							<th colspan="5"><output></output></th> 
