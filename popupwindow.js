@@ -222,6 +222,9 @@
 		//-----------мониторинг поля для вызова всплывающего окна
 		$(".contanerTransparent").click(function(event){
 			Iam_contanerTransparent_forCounting=event.target.id;
+			if (!Iam_contanerTransparent_forCounting) {
+                Iam_contanerTransparent_forCounting = $(event.target).parent().attr('id');
+            }
 			$("#windowElement").modal();
 		});//КОНЕЦ мониторинга поля для вызова всплывающего окна
 
@@ -388,9 +391,6 @@
 		//-----------мониторинг поля вызова всплывающего окна
 		$(".contanerTransparent").click(function(event){
 			Iam_contanerTransparent_forSetting=event.target.id;
-			if (!Iam_contanerTransparent_forSetting) {
-                Iam_contanerTransparent_forSetting = $(event.target).parent().attr('id');
-            }
 			//ResetSelect(Iam_button);
 			ConfigurationOfPopUpWindow();
 		});//КОНЕЦ мониторинга поля вызова всплывающего окна
