@@ -4,6 +4,27 @@ function randomInteger(min, max) {
     return rand;
 }
 
+function calculateRoad($tr) {
+    var value = $tr.find('.read-level').val();
+
+    var level = value === 'B' ? 1.5 : value;
+
+    return level * randomInteger(1, 10);
+
+}
+
+function getOneElementValue($tr) {
+    var type = $tr.find('.element-type').val();
+
+    switch (type) {
+        case 'road':
+            return calculateRoad($tr);
+            break;
+        default:
+            return 0;
+    }
+}
+
 function calculateSum() {
     var result = 0;
     $('.element-value').each(function (i, item) {
@@ -46,13 +67,12 @@ $('.road-type').change(function (e) {
 
 $('.read-level').change(function(e) {
     var $select = $(e.target);
-    var randomValue = randomInteger(1, 10);
-    var level = e.target.value === 'B' ? 1.5 : e.target.value;
+    var value = getOneElementValue($select.parents('tr'));
 
     $select
         .parents('tr')
         .find('.element-value')
-        .val(level * randomValue);
+        .val(value);
 
     calculateSum();
 });
