@@ -162,7 +162,7 @@ table.tableCalculator th:nth-of-type(5){width: 15px}
 
 .paddingTable{padding: 0 5px;}
 
-.convexFont{text-shadow: 1px 1px 0px #333, -1px -1px 0px #ccc;}
+.convexFont{text-shadow: 1px 1px 1px #999, -1px -1px 0px #ccc;}
 
 .fontOfTitle{font-size:18px;}
 .floatR{float:right;}
