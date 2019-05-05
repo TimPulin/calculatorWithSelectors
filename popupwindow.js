@@ -491,8 +491,8 @@
 	$(document).ready(function(){
 		
 		var Iam_contanerTransparent_forShowAndHide;
-		var carent_value_forShowAndHide;
-		var carrent_class_forShowAndHide;
+		var value_forShowAndHide;
+		
 		
 		//-----------мониторинг поля вызова всплывающего окна
 		$(".contanerTransparent").click(function(event){
@@ -509,20 +509,28 @@
 		
 		//функция проверки на выбор прыжкового элемента
 		function CheckIfElementIsJump(){
-			$(".modal-content").find(".JSjumps, .JSspins, .JSsteps").each(function(index){
-				carent_value_forShowAndHide=$(this).css("display");
-				carrent_class_forShowAndHide=$(this).attr("class");
-				if(carent_value_forShowAndHide=="block" && carrent_class_forShowAndHide=="hide JSjumps"){
-					ShowCheckbox_SecondHalf();
-				}else{HideCheckbox_SecondHalf();}
+			value_forShowAndHide=$(".modal-content").find(".JSjumps").css("display");
+			if(value_forShowAndHide=="block"){
+				ShowCheckbox_SecondHalf();
+			}
+			else{HideCheckbox_SecondHalf()};
 		};//конец функции проверки на выбор прыжкового элемента
 		
 		function ShowCheckbox_SecondHalf(){
-			Iam_contanerTransparent_forShowAndHide.show(".JScheckboxSecondPart");
+			$("#"+Iam_contanerTransparent_forShowAndHide).parent().parent().find(".JScheckboxSecondPart").show();
 		};
 		function HideCheckbox_SecondHalf(){
-			Iam_contanerTransparent_forShowAndHide.hide(".JScheckboxSecondPart");
-		}
+			$("#"+Iam_contanerTransparent_forShowAndHide).parent().parent().find(".JScheckboxSecondPart").prop("checked", false).hide();
+		};
 	});//КОНЕЦ блока показа и скрытия чекбоска "вторая половина программы"
 	
-		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
