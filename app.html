@@ -101,14 +101,32 @@
 <div class="template" id="spin">
     <div class="row">
         <div class="col-sm-7">
-            <select class="form-control road-type">
-                <option>Выбирите дорожку</option>
-                <option value="B,1,2,3,4">Дорожка - StSq</option>
-                <option value="1">Дорожка - ChSq</option>
+            <select class="form-control some-think">
+                <option value=0></option>
+                <option value="3">F</option>
             </select>
         </div>
         <div class="col-sm-4">
-            <select class="form-control read-level" disabled></select>
+            <select class="form-control positions">
+                <option value=0 disabled selected class="hide">Выбирите вращение</option>
+                <option value=0></option>
+                <optgroup label="базовые позиции">
+                    <option value="1">USp</option>
+                    <option value="1">LSp</option>
+                    <option value="1">CSp</option>
+                    <option value="1">SSp</option>
+                </optgroup>
+                <optgroup label="со сменой ноги">
+                    <option value="2">CUSp</option>
+                    <option value="3">CLSp</option>
+                    <option value="3">CCSp</option>
+                    <option value="3">CSSp</option>
+                </optgroup>
+                <optgroup label="комбинации">
+                    <option value="4">CoSp</option>
+                    <option value="5">CCoSp</option>
+                </optgroup>
+            </select>
         </div>
 
         <div class="col-sm-1">
