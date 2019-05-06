@@ -4,8 +4,8 @@
 	
 	//всплывающие подсказки
 	$(document).ready(function(){
-		$("[data-toggle='tooltip']").tooltip({
-			placement: "right",
+		$(".JScheckboxSecondPart[data-toggle='tooltip']").tooltip({
+			placement: "left",
 			title: "элемент во второй половине программы"
 		});
 	});
@@ -37,12 +37,7 @@
 	
 	
 
-	//функция очистки области "atention"
-	function clean_up_atention(){
-		$("#atention").text("");
-		$("#atention").css({"color":"black"});
-	};
-
+	
 	
 	
 	

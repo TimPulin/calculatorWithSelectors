@@ -208,64 +208,85 @@
 	//СКРИПТЫ СВЯЗИ С ВСПЛЫВАЮЩИМ ОКНОМ (с вычислительной частью)
 	$(document).ready(function(){
 		
-		//переменные для Calculation()
-		let Iam_contanerTransparent_forCounting;
-		let arrOfItems=[];
-		let arrBus=[];
-		let item;
-		let score;
-		let score_sub;
-		let Iam;
-		let Iam_for_Calculation;
+		var ID_greyStripe_forCounting;
+		var arrValueAndNameOfElement={};
+		var name_of_property_for_main_counting;
+		var value_of_property_for_main_counting;
+		var Iam_click_in_main_window_forCounting;
 		
+		//переменные для Calculation()
+		var arrOfItems=[];
+		var item;
+		var itemLow;
+		var score;
+		var score_sub;
+		var option_of_select;
+		var Iam;
+		var Iam_for_Calculation;
 		
 		//-----------мониторинг поля для вызова всплывающего окна
 		$(".contanerTransparent").click(function(event){
-			Iam_contanerTransparent_forCounting=event.target.id;
+			Iam_click_in_main_window_forCounting=$(this);
+			GetID();
 			$("#windowElement").modal();
 		});//КОНЕЦ мониторинга поля для вызова всплывающего окна
+		
+		function GetID(){
+			ID_greyStripe_forCounting=Iam_click_in_main_window_forCounting.closest(".greyStripe").attr("id");
+			return;
+		};
 		
 		//-----------мониторинг селектов----------
 		$("div.JSmodalWindow select").change(function(){					
 			Iam_for_Calculation=$(this).parent().parent().parent().parent();
-			Calculation(arrOfItems, arrBus, item, score, score_sub);
-			Reading_arrBus();
+			DirectorModalWindow();
 		});//КОНЕЦ мониторинга селектов
 		
-		function Reading_arrBus(){
-			arrOfItems=arrBus[0];
-			score_sub=arrBus[1];
-			arrBus.splice(0,arrBus.length);
-			return;
+		function DirectorModalWindow(){
+			Calculation();
+			ShowItemAndScoreInPopup();
 		};
 		
 		//мониторинг кнопки "сохранить"
-		$(".buttonSave").click(function(){
-			Calculation( arrOfItems, arrBus, item, score, score_sub);
-			Reading_arrBus();
-			PrintIn();
-			ResetVar();
-		});
-		
+		$(".buttonSave").click(function(){DirectorBetweenMainAndModalWindow()});
 		//мониторинг кнопки "сброс"
-		$(".JSbuttonReset_Modal").click(function(){
-			CleanUp_arrOfItems(arrOfItems);
-			score_sub=0;
+		$(".JSbuttonReset_Modal").click(function(){DirectorBetweenMainAndModalWindow()});
+		
+		function DirectorBetweenMainAndModalWindow(){
+			Calculation();
+			PushInto_arrValueAndNameOfElement();
 			PrintIn();
 			ResetVar();
-		});
+		};
+		
+		//функция формирования объекта arrValueAndNameOfElement с названием элемента и его стоимостью
+		function PushInto_arrValueAndNameOfElement(){
+			MakeTheName();
+			arrValueAndNameOfElement[name_of_property_for_main_counting]=arrOfItems.join("");
+			arrValueAndNameOfElement[value_of_property_for_main_counting]=score_sub;
+			return;
+		};
+		
+		//функция формирования имени свойства объекта arrValueAndNameOfElement
+		function MakeTheName(){
+			name_of_property_for_main_counting=ID_greyStripe_forCounting;
+			name_of_property_for_main_counting=name_of_property_for_main_counting+"name";
+			value_of_property_for_main_counting=ID_greyStripe_forCounting;
+			value_of_property_for_main_counting=value_of_property_for_main_counting+"value";
+			return;
+		};
 		
 		//функция вывода названия элемента и стоимости на главную страницу
 		function PrintIn(){
-			$("#"+Iam_contanerTransparent_forCounting).find(".JSoutputTransparent_NameOfElement").text(arrOfItems.join(""));
-			$("#"+Iam_contanerTransparent_forCounting).parent().parent().find(".JSoutputTransparent_ValueOfElement").text(score_sub.toFixed(2));
+			$("#"+ID_greyStripe_forCounting).find(".JSoutputTransparent_NameOfElement").text(arrValueAndNameOfElement[name_of_property_for_main_counting]);
+			$("#"+ID_greyStripe_forCounting).find(".JSoutputTransparent_ValueOfElement").text(arrValueAndNameOfElement[value_of_property_for_main_counting].toFixed(2));
 			return;
 		};
 		
 		//функция сброса переменных
 		function ResetVar(){
-			Iam_contanerTransparent_forCounting=undefined;
-			CleanUp_arrOfItems(arrOfItems);
+			ID_greyStripe_forCounting=null;
+			CleanUp_arrOfItems(); 
 			item="";
 			score=0;
 			score_sub=0;
@@ -273,19 +294,21 @@
 			return;
 		};
 		
+		//функция очистки массива набранных элементов в всплывающем окне 
+		function CleanUp_arrOfItems(){
+			arrOfItems.splice(0, arrOfItems.length);
+			return
+		};//КОНЕЦ CleanUp_arrOfItems
 			
-		//БЛОК ВЫЧИСЛИТЕЛЬНОЙ ЧАСТИ
-	
-		//----------------функция подсчета--------------
-		function Calculation( arrOfItems, arrBus, item, score, score_sub){
-			var itemLow;
-			var option_of_select;
+			
+		//ВЫЧИСЛИТЕЛЬНАЯ ЧАСТЬ
+		//----------------функция подсчета-------------- 
+		function Calculation(){
+			
 			score_sub=0;
 			CleanUp_arrOfItems(arrOfItems);
-			if(Iam_for_Calculation==undefined){
-				Push_arrBus(arrOfItems, score_sub, arrBus);
-				return arrBus;
-			};
+			if(Iam_for_Calculation==undefined){return};
+			
 			//цикл проверки всех селектов
 			Iam_for_Calculation.find(".contanerGrey").each(function(index){
 				item="";
@@ -297,7 +320,7 @@
 						option_of_select="";
 					};
 					item=item+option_of_select;
-				});//конец цикла проверки полей
+				});//конец цикла проверки селектов одного прыжка
 			
 				itemLow = item.toLowerCase();
 				score=list_value[itemLow];
@@ -316,51 +339,33 @@
 					};
 				};//КОНЕЦ отсчет второго элемента для комбинации прыжков
 				
-				if (index>=1 && item!=null){ //отсчет второго и третьего прыжка для каскадов
-					item="+"+item;
-				};
-			
-				ShowItemAndScoreInPopup(Iam_for_Calculation, arrOfItems, item, score, score_sub);
+				//отсчет второго и третьего прыжка для каскадов
+				if (index>=1 && item!=null){item="+"+item};
+				
+				if(item!=null){arrOfItems.push(item)};
+				Iam.parent().parent().find("output").text(score.toFixed(2));
 			});//КОНЕЦ цикла проверки всех селектов
-			Push_arrBus(arrOfItems, score_sub, arrBus);
-			return arrBus;
+			return;
 		};//КОНЕЦ Calculation()	
 	
-		//функция упаковки переменных в массив
-		function Push_arrBus(arrOfItems, score_sub, arrBus){
-			arrBus.push(arrOfItems);
-			arrBus.push(score_sub);
-			return arrBus;
-		};//КОНЕЦ Push_arrBus()
-			
 		//функция вывода названия элемента и его стоимости в вверхнюю строчку всплывающего окна
-		function ShowItemAndScoreInPopup(Iam_for_Calculation, arrOfItems, item, score, score_sub){
-			if(item!=null){
-				arrOfItems.push(item);
-			};
+		function ShowItemAndScoreInPopup(){
 			Iam_for_Calculation.parent().find(".outputTitle_NameOfElement").text(arrOfItems.join(""));
 			Iam_for_Calculation.parent().find(".outputTitle_ValueOfElement").text(score_sub.toFixed(2));
-			Iam.parent().parent().find("output").text(score.toFixed(2));
 			return;
 		};//КОНЕЦ ShowItemAndScoreInPopup()
 	
-		//функция очистки массива набранных элементов в всплывающем окне
-		function CleanUp_arrOfItems(arrOfItems){
-			arrOfItems.splice(0, arrOfItems.length);
-			return
-		};//КОНЕЦ CleanUp_arrOfItems
-			
 		//функция проверки второго элемента - является ли он акселем
 		function CheckAxels(itemLow){
 			for (let i=0; i<arrOfAxels.length; i++){
 				if(arrOfAxels[i]===itemLow){
 				return true;	
-			};	
-		};
-		return false;
+				};	
+			};
+			return false;
 		};//КОНЕЦ CheckAxels(itemLow)
 	
-	//КОНЕЦ БЛОКА ВЫЧИСЛИТЕЛЬНОЙ ЧАСТИ----------------------------	
+		//КОНЕЦ БЛОКА ВЫЧИСЛИТЕЛЬНОЙ ЧАСТИ----------------------------	
 	});//КОНЕЦ СКРИПТОВ СВЯЗИ С ВСПЛЫВАЮЩИМ ОКНОМ (с вычислительной частью)	
 	
 	
@@ -369,31 +374,28 @@
 	$(document).ready(function(){
 		
 		var Iam_button=$(".modal-content");
-		var Iam_select_for_simulation;	
 		
-		var Iam_contanerTransparent_forSetting;
-		var name_of_property
+		var ID_greyStripe_forSetting;
+		var Iam_click_in_main_window_forSetting;
+		var name_of_property_forSetting;
 		
 		var arrListOfIndexForSelect={};
 		var arrListOfHideForDisplayElements={};
 		var arrListOfHideForDisplayJumps={};
 		
-		var carent_index;
-		var carent_value;
 		var carrent_class;
 		
-		var index_of_selected;
-		var value_of_display;
-		
 		//-----------мониторинг поля вызова всплывающего окна
-		$(".contanerTransparent").click(function(event){
-			Iam_contanerTransparent_forSetting=event.target.id;
-			if (!Iam_contanerTransparent_forSetting) {
-				Iam_contanerTransparent_forSetting = $(event.target).parent().attr('id');
-			};
-			//ResetSelect(Iam_button);
+		$(".contanerTransparent").click(function(){
+			Iam_click_in_main_window_forSetting=$(this);
+			GetIDForSetting();
 			ConfigurationOfPopUpWindow();
 		});//КОНЕЦ мониторинга поля вызова всплывающего окна
+		
+		function GetIDForSetting(){
+			ID_greyStripe_forSetting=Iam_click_in_main_window_forSetting.closest(".greyStripe").attr("id");
+			return;
+		};
 		
 		//мониторинг кнопки "сохранить"
 		$(".buttonSave").click(function(){
@@ -409,11 +411,8 @@
 		//функция определения и записи в объект значений выбранных селектов
 		function GetSelectInfo(){
 			$(".modal-content").find("select").each(function(index){
-				name_of_property=Iam_contanerTransparent_forSetting;
-				name_of_property=name_of_property+index;
-				carent_index=$(this).prop("selectedIndex");
-				arrListOfIndexForSelect[name_of_property]=carent_index;
-				
+				MakeTheName_ForSetting(index);
+				arrListOfIndexForSelect[name_of_property_forSetting]=$(this).prop("selectedIndex");
 			});
 			return
 		};//КОНЕЦ GetSelectInfo()
@@ -421,43 +420,34 @@
 		//функция определения и записи в объект активной части всплывающего окна
 		function GetHideInfo(){
 			$(".modal-content").find(".JSjumps, .JSspins, .JSsteps").each(function(index){
-				name_of_property=Iam_contanerTransparent_forSetting;
-				name_of_property=name_of_property+index;
-				carent_value=$(this).css("display");
-				arrListOfHideForDisplayElements[name_of_property]=carent_value;
+				MakeTheName_ForSetting(index);
+				arrListOfHideForDisplayElements[name_of_property_forSetting]=$(this).css("display");
 			});
 			$(".modal-content").find(".hide.contanerGrey").each(function(index){
-				name_of_property=Iam_contanerTransparent_forSetting;
-				name_of_property=name_of_property+index;
-				carent_value=$(this).css("display");
-				arrListOfHideForDisplayJumps[name_of_property]=carent_value;
+				MakeTheName_ForSetting(index);
+				arrListOfHideForDisplayJumps[name_of_property_forSetting]=$(this).css("display");
 			});
 			return;
 		};//КОНЕЦ GetHideInfo()
 		
 		// функция формирования вида всплывающего окна в соответствии со сделанным ранее выбором
 		function ConfigurationOfPopUpWindow(){
-			name_of_property=Iam_contanerTransparent_forSetting;
-			name_of_property=name_of_property+0;
-			if(arrListOfIndexForSelect[name_of_property]!=undefined){
+			MakeTheName_ForSetting(0);
+			if(arrListOfIndexForSelect[name_of_property_forSetting]!=undefined){
 				Iam_button.find(".outputTitle_NameOfElement, .outputTitle").text("");
 				Iam_button.find(".outputTitle_ValueOfElement, .outputValueOfElement").text("0.00");
 			//показ активной части 
 				$(".modal-content").find("div.JSjumps, div.JSspins, div.JSsteps").each(function(index){
-					name_of_property=Iam_contanerTransparent_forSetting;
-					name_of_property=name_of_property+index;
-					value_of_display=arrListOfHideForDisplayElements[name_of_property];
-					$(this).css("display", value_of_display);
+					MakeTheName_ForSetting(index);
+					$(this).css("display", arrListOfHideForDisplayElements[name_of_property_forSetting]);
 					carrent_class=$(this).attr("class");
 				//симуляция нажатия кнопки
-					if(value_of_display=="block"){
+					if(arrListOfHideForDisplayElements[name_of_property_forSetting]=="block"){
 						if(carrent_class=="hide JSjumps"){
 							$(".JSbuttonJumps").click();
 							$(".modal-content").find(".hide.contanerGrey").each(function(index){
-								name_of_property=Iam_contanerTransparent_forSetting;
-								name_of_property=name_of_property+index;
-								value_of_display=arrListOfHideForDisplayJumps[name_of_property];
-								$(this).css("display", value_of_display);
+								MakeTheName_ForSetting(index);
+								$(this).css("display", arrListOfHideForDisplayJumps[name_of_property_forSetting] );
 							});
 						} else if(carrent_class=="hide JSspins"){
 							$(".JSbuttonSpins").click();
@@ -469,12 +459,10 @@
 			
 			//формирование состояние селектов
 				$(".modal-content").find("select").each(function(index){ 
-					name_of_property=Iam_contanerTransparent_forSetting;
-					name_of_property=name_of_property+index;
-					index_of_selected=arrListOfIndexForSelect[name_of_property];
-					$(this).prop("selectedIndex", index_of_selected) 
+					MakeTheName_ForSetting(index);
+					$(this).prop("selectedIndex", arrListOfIndexForSelect[name_of_property_forSetting]);
 				//симуляция изменения значения селекта
-					if(index_of_selected>0){
+					if(arrListOfIndexForSelect[name_of_property_forSetting]>0){
 						$(this).change();
 					};
 				}); //КОНЕЦ формирования состояния селектов
@@ -484,48 +472,75 @@
 			};
 			return;
 		};//КОНЕЦ ConfigurationOfPopUpWindow()
-	});//КОНЕЦ БЛОКА ЗАПОМИНАНИЯ ВЫБОРА СЕЛЕКТОВ В ВСПЛЫВАЮЩЕМ ОКНЕ
+		
+		//функция формирования имени свойства объектов
+		function MakeTheName_ForSetting(index){
+			name_of_property_forSetting=ID_greyStripe_forSetting;
+			name_of_property_forSetting=name_of_property_forSetting+index;
+			return;
+		};//КОНЕЦ MakeTheName_ForSetting
+	});//КОНЕЦ блока запоминания выбора селектов в всплывающем окне
 	
 	
 	//БЛОК ПОКАЗА И СКРЫТИЯ ЧЕКБОКСА "вторая половина программы"
 	$(document).ready(function(){
 		
-		var Iam_contanerTransparent_forShowAndHide;
-		var value_forShowAndHide;
-		
+		var Iam_click_in_main_window_forShowAndHide;
+		var ID_greyStripe_forShowAndHide;
+		var display_for_ShowAndHide;
 		
 		//-----------мониторинг поля вызова всплывающего окна
-		$(".contanerTransparent").click(function(event){
-			Iam_contanerTransparent_forShowAndHide=event.target.id;
-			if (!Iam_contanerTransparent_forShowAndHide) {
-				Iam_contanerTransparent_forShowAndHide = $(event.target).parent().attr('id');
-			};
+		$(".contanerTransparent").click(function(){
+			Iam_click_in_main_window_forShowAndHide=$(this);
+			GetIDForShowAndHide();
 		});//КОНЕЦ мониторинга поля вызова всплывающего окна
 		
+		function GetIDForShowAndHide(){
+			ID_greyStripe_forShowAndHide=Iam_click_in_main_window_forShowAndHide.closest(".greyStripe").attr("id");
+			return;
+		};
+		
 		//мониторинг кнопки "сохранить"
-		$(".buttonSave").click(function(){
-			CheckIfElementIsJump();
-		});	
+		$(".buttonSave").click(function(){CheckIfElementIsJump()});	
+		//мониторинг кнопки "сброс"
+		$(".JSbuttonReset_Modal").click(function(){CheckIfElementIsJump()});	
 		
 		//функция проверки на выбор прыжкового элемента
 		function CheckIfElementIsJump(){
-			value_forShowAndHide=$(".modal-content").find(".JSjumps").css("display");
-			if(value_forShowAndHide=="block"){
+			display_for_ShowAndHide=$(".modal-content").find(".JSjumps").css("display");
+			if(display_for_ShowAndHide=="block"){
 				ShowCheckbox_SecondHalf();
 			}
 			else{HideCheckbox_SecondHalf()};
 		};//конец функции проверки на выбор прыжкового элемента
 		
 		function ShowCheckbox_SecondHalf(){
-			$("#"+Iam_contanerTransparent_forShowAndHide).parent().parent().find(".JScheckboxSecondPart").show();
+			$("#"+ID_greyStripe_forShowAndHide).find(".JScheckboxSecondPart").show();
 		};
 		function HideCheckbox_SecondHalf(){
-			$("#"+Iam_contanerTransparent_forShowAndHide).parent().parent().find(".JScheckboxSecondPart").prop("checked", false).hide();
+			$("#"+ID_greyStripe_forShowAndHide).find(".JScheckboxSecondPart").prop("checked", false).hide();
 		};
-	});//КОНЕЦ блока показа и скрытия чекбоска "вторая половина программы"
+	});//КОНЕЦ блока показа и скрытия чекбокса "вторая половина программы"
 	
 	
-	
+	//БЛОК УМНОЖЕНИЯ СТОИМОСТИ ПРЫЖКА ЗА ИСПОЛНЕНИЕ ВО ВТОРОЙ ПОЛОВИНЕ ПРОГРАММЫ
+	$(document).ready(function(){
+		
+		var Iam_checkbox_secondpart;
+		
+		$(".JScheckboxSecondPart").click(function(){
+			Iam_checkbox_secondpart=$(this);
+			BonusForSecondPart();
+		});
+		function BonusForSecondPart(){
+			if(Iam_checkbox_secondpart.prop("checked")){
+					Iam_for_bonus=$(this).parent().parent().find("output.JSoutputTransparent_ValueOfElement");
+					val_of_output=Iam_for_bonus.val()*1.1;
+					Iam_for_bonus.val(val_of_output.toFixed(2));
+				};
+			
+		};
+	});//КОНЕЦ блока умножения
 	
 	
 	
