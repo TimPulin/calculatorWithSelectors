@@ -1,7 +1,7 @@
 
-	
-	
-	
+
+
+
 	//всплывающие подсказки
 	$(document).ready(function(){
 		$(".JScheckboxSecondPart[data-toggle='tooltip']").tooltip({
@@ -28,17 +28,3 @@
 		};
 		Iam.next().toggle()
 	}; //конец свернуть-развернуть
-
-	
-
-	
-
-
-	
-	
-
-	
-	
-	
-	
-	

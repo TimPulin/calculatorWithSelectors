@@ -1,3 +1,4 @@
+
 function randomInteger(min, max) {
     var rand = min + Math.random() * (max + 1 - min);
     rand = Math.floor(rand);
@@ -75,4 +76,5 @@ $('.read-level').change(function(e) {
         .val(value);
 
     calculateSum();
+
 });
