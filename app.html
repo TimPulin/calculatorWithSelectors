@@ -28,6 +28,8 @@
 
     <script src="src/utils.js"></script>
     <script src="src/app-plugin.js"></script>
+    <script src="src/elements/road.js"></script>
+    <script src="src/elements/spin.js"></script>
     <script src="src/run-app.js"></script>
 </head>
 
@@ -47,28 +49,17 @@
 
         <div class="list"></div>
 
-        <div class="form-group row">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-                <select class="form-control types"></select>
-            </div>
-            <div class="col-sm-4">
-                <button class="add btn btn-primary">Добавить&nbsp;элемент</button>
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-sm-4"></div>
-            <label class="col-sm-4 col-form-label">
-                <div class="input-group mb-4">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">Результат</div>
-                    </div>
+        <div class="alert alert-success" role="alert">
+            <div class="row">
+                <div class="col">
+                    <button class="add btn btn-primary">Добавить&nbsp;элемент</button>
+                </div>
+                <div class="col">
+                    <button class="calculate btn btn-primary">Посчитать</button>
+                </div>
+                <div class="col">
                     <input type="text" class="form-control main-result" disabled>
                 </div>
-            </label>
-            <div class="col-sm-4">
-                <button class="calculate btn btn-primary">Посчитать</button>
             </div>
         </div>
     </div>
@@ -76,7 +67,16 @@
 
 
 <div class="template" id="elementRow">
-    <div class="alert alert-primary" role="alert"></div>
+    <div class="alert alert-primary" role="alert">
+        <div class="row">
+            <div class="col-sm-2">
+                <select class="form-control element-type">
+                    <option>выбирите элемент</option>
+                </select>
+            </div>
+            <div class="col-sm-10 content"></div>
+        </div>
+    </div>
 </div>
 
 <div class="template" id="road">
@@ -84,12 +84,22 @@
         <div class="col-sm-7">
             <select class="form-control road-type">
                 <option>Выбирите дорожку</option>
-                <option value="B,1,2,3,4">Дорожка - StSq</option>
-                <option value="1">Дорожка - ChSq</option>
+                <option value="StSq">Дорожка - StSq</option>
+                <option value="ChSq">Дорожка - ChSq</option>
             </select>
         </div>
         <div class="col-sm-4">
-            <select class="form-control read-level" disabled></select>
+            <select class="form-control read-level StSq">
+                <option value="0">0</option>
+                <option value="1.5">B</option>
+                <option value="1.8">1</option>
+                <option value="2.6">2</option>
+                <option value="3.3">3</option>
+                <option value="3.9">4</option>
+            </select>
+            <select class="form-control read-level ChSq" disabled>
+                <option value="3">1</option>
+            </select>
         </div>
 
         <div class="col-sm-1">

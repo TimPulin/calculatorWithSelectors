@@ -1,30 +1,10 @@
-
+function Row(types) {
+    var elementContainer = utils.renderTemplate('elementRow');
+}
 
 $.fn.appCalculator = function (params) {
     var $el = $(this);
 
-    // Create select for types
-    var options = params.types.map(function (item, index) {
-        return '<option value="' + index + '">' + item.label +'</option>';
-    });
-    $el.find(params.typesSelect).html(options);
-
-    var elements = [];
-    function addElement() {
-        var selectValue = $el.find(params.typesSelect).val();
-
-        var el = params.types[selectValue];
-
-        var $myRow = utils.renderTemplate(el.templateId);
-        var elementBlock = new el.Element($myRow);
-
-        var elementContainer = utils.renderTemplate('elementRow');
-        elementContainer.append($myRow);
-
-        $el.find(params.listContainer).append(elementContainer);
-
-        elements.push(elementBlock);
-    }
     function calculateResult() {
         var result = 0;
 
@@ -35,6 +15,37 @@ $.fn.appCalculator = function (params) {
         $el.find(params.resultInput).val(result);
     }
 
-    $el.find(params.addButton).click(addElement);
+    var elements = [];
+    function addRow() {
+        var nextIndex = elements.length;
+
+        var elementContainer = utils.renderTemplate('elementRow');
+
+        // Create select for types
+        var options = params.types.map(function (item, index) {
+            return '<option value="' + index + '">' + item.label +'</option>';
+        });
+
+        var $selectType = elementContainer.find('.element-type');
+        $selectType
+            .append(options)
+            .change(() => {
+                changeElementType($selectType, elementContainer, nextIndex)
+            });
+        $el.find(params.listContainer).append(elementContainer);
+    }
+    function changeElementType($selectType, elementContainer, nextIndex) {
+        var elementCreatorIndex = $selectType.val();
+        var el = params.types[elementCreatorIndex];
+
+        var $myRow = utils.renderTemplate(el.templateId);
+        var elementBlock = new el.Element($myRow);
+
+        elementContainer.find('.content').html($myRow);
+
+        elements[nextIndex] = elementBlock;
+    }
+
+    $el.find(params.addButton).click(addRow);
     $el.find(params.calculateButton).click(calculateResult);
 }
