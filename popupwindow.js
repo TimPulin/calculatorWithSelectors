@@ -41,6 +41,7 @@
 		Iam_button.find(".hide").hide();
 		Iam_button.find("select").prop("selectedIndex","0");
 		Iam_button.find(".disabled").prop("disabled",true);
+		Iam_button.find(".JSspins select.JSselectAdditional").css("color","#999");
 		Iam_button.find(".outputTitle_NameOfElement, .outputTitle").text("");
 		Iam_button.find(".outputTitle_ValueOfElement, .outputValueOfElement").text("0.00");
 		return;
@@ -100,7 +101,8 @@
 
 		//-------------------работа кнопки "добавить прыжок"-----------------
 		$(".buttonAddJump").click(function(){
-			$(this).parent().next().show()
+			$(this).parent().next().show();
+			$(this).parent().next().find("select:first").prop("disabled", false);
 		});//КОНЕЦ "добавить прыжок"
 
 		//--------------мониторинг изменения значения селектов для показа имени

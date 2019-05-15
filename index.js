@@ -5,8 +5,9 @@
 	//всплывающие подсказки
 	$(document).ready(function(){
 		$(".JScheckboxSecondPart[data-toggle='tooltip']").tooltip({
-			placement: "left",
-			title: "элемент во второй половине программы"
+			placement: "top",
+			title: "прыжок во второй половине программы",
+			delay: { show: 300, hide: 500 }
 		});
 	});
 
