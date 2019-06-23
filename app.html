@@ -26,6 +26,7 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
 
+    <script src="https://jangot.github.io/f-calculator-core/dist/main.1.0.2.js"></script>
     <script src="src/utils.js"></script>
     <script src="src/app-plugin.js"></script>
     <script src="src/elements/road.js"></script>
@@ -110,36 +111,25 @@
 
 <div class="template" id="spin">
     <div class="row">
-        <div class="col-sm-7">
-            <select class="form-control some-think">
-                <option value=0></option>
-                <option value="3">F</option>
-            </select>
+        <div class="col-sm-2">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" name="f" type="checkbox">
+                <label class="form-check-label">F</label>
+            </div>
         </div>
         <div class="col-sm-4">
-            <select class="form-control positions">
-                <option value=0 disabled selected class="hide">Выбирите вращение</option>
-                <option value=0></option>
-                <optgroup label="базовые позиции">
-                    <option value="1">USp</option>
-                    <option value="1">LSp</option>
-                    <option value="1">CSp</option>
-                    <option value="1">SSp</option>
-                </optgroup>
-                <optgroup label="со сменой ноги">
-                    <option value="2">CUSp</option>
-                    <option value="3">CLSp</option>
-                    <option value="3">CCSp</option>
-                    <option value="3">CSSp</option>
-                </optgroup>
-                <optgroup label="комбинации">
-                    <option value="4">CoSp</option>
-                    <option value="5">CCoSp</option>
-                </optgroup>
-            </select>
+            <select class="form-control" name="type"></select>
         </div>
-
-        <div class="col-sm-1">
+        <div class="col-sm-2">
+            <select class="form-control" name="level"></select>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" name="error" type="checkbox">
+                <label class="form-check-label">V</label>
+            </div>
+        </div>
+        <div class="col-sm-2">
             <input class="form-control result" type="text">
         </div>
     </div>
